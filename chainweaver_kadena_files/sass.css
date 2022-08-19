@@ -1,0 +1,3656 @@
+/*
+  Overall structure: https://en.bem.info/methodology/quick-start/
+
+  We have "primary" controls which are important and very prominent in a
+  widget. They are usually mandatory to use and at the top, example backend
+  selection in deploy confirmation dialog.
+
+  Then we have "secondary" controls. Use this for actions that trigger
+  something not entirely trivial, but also not like super important. E.g.
+  opening the details page of some item.
+
+  Then we have "tertiary" controls which offer functionality the user might
+  want to use, but certainly does not need too. Consider them optional
+  controls. Example: Backend filter in the module selection.
+
+  Primary buttons are black, secondary buttons have black text, tertiary
+  buttons have dark grey text on grey background.
+*/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+@font-face {
+  font-family: WorkSans-Black;
+  src: url(/static/fonts/WorkSans-Black.ttf); }
+
+@font-face {
+  font-family: WorkSans-Bold;
+  src: url(/static/fonts/WorkSans-Bold.ttf); }
+
+@font-face {
+  font-family: WorkSans-ExtraBold;
+  src: url(/static/fonts/WorkSans-ExtraBold.ttf); }
+
+@font-face {
+  font-family: WorkSans-ExtraLight;
+  src: url(/static/fonts/WorkSans-ExtraLight.ttf); }
+
+@font-face {
+  font-family: WorkSans-Light;
+  src: url(/static/fonts/WorkSans-Light.ttf); }
+
+@font-face {
+  font-family: WorkSans-Medium;
+  src: url(/static/fonts/WorkSans-Medium.ttf); }
+
+@font-face {
+  font-family: WorkSans-Regular;
+  src: url(/static/fonts/WorkSans-Regular.ttf); }
+
+@font-face {
+  font-family: WorkSans;
+  src: url(/static/fonts/WorkSans-Regular.ttf); }
+
+@font-face {
+  font-family: WorkSans-SemiBold;
+  src: url(/static/fonts/WorkSans-SemiBold.ttf); }
+
+@font-face {
+  font-family: WorkSans-Thin;
+  src: url(/static/fonts/WorkSans-Thin.ttf); }
+
+@font-face {
+  font-family: RobotoMono;
+  src: url(/static/fonts/RobotoMono-Regular.ttf); }
+
+@font-face {
+  font-family: RobotoMono-Light;
+  src: url(/static/fonts/RobotoMono-Light.ttf); }
+
+@font-face {
+  font-family: RobotoMono-Italic;
+  src: url(/static/fonts/RobotoMono-Italic.ttf); }
+
+@font-face {
+  font-family: RobotoMono-LightItalic;
+  src: url(/static/fonts/RobotoMono-LightItalic.ttf); }
+
+@font-face {
+  font-family: HaasGrotDisp75;
+  src: url("/static/fonts/HaasGrotDisp-75Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: HaasGrotDisp45;
+  src: url("/static/fonts/HaasGrotDisp-45Light.otf") format("opentype"); }
+
+@font-face {
+  font-family: Arial-BoldMT;
+  src: url(/static/fonts/Arial-BoldMT.ttf); }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/* Basic CSS common to all of chainweaver */
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+* {
+  box-sizing: border-box;
+  outline: none; }
+
+html,
+body {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "WorkSans-Regular", sans-serif;
+  background: #f1f1f1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; }
+
+code {
+  font-family: 'RobotoMono', monospace; }
+
+.title {
+  font-family: WorkSans;
+  display: block;
+  font-weight: 600; }
+
+.description {
+  font-family: WorkSans;
+  font-size: 13px; }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #57b5e1 #fff; }
+
+*::-webkit-scrollbar {
+  width: 18px;
+  height: 18px; }
+
+*::-webkit-scrollbar-track {
+  background: #fff; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: #57b5e1;
+  border-radius: 6px;
+  border: 3px solid #fff; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.button {
+  position: relative;
+  -webkit-appearance: none;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d7d7d7;
+  background: transparent;
+  height: 36px;
+  line-height: 32px;
+  font-family: "WorkSans";
+  color: black;
+  padding: 0 20px;
+  margin: 0;
+  cursor: pointer; }
+  .button.extra-margin {
+    margin: 12px; }
+
+.button_group {
+  width: auto !important;
+  border: 1px solid grey;
+  border-radius: 5px;
+  display: inline-block; }
+  .button_group .button {
+    width: 8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    margin: 0;
+    border: none;
+    background: white;
+    border-radius: 0;
+    color: grey;
+    border-right: 1px solid grey; }
+  .button_group .button:hover, .button_group .button:active {
+    background: whitesmoke !important;
+    filter: none; }
+  .button_group .button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+  .button_group .button:last-child {
+    border-right: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px; }
+  .button_group .button.chosen {
+    background: #57b5e1;
+    color: white;
+    font-weight: bold; }
+  .button_group .button.chosen:hover, .button_group .button.chosen:active {
+    background: #3489c9 !important;
+    filter: none; }
+
+.button__text-icon {
+  display: inline-block;
+  margin-right: 7px;
+  position: relative;
+  bottom: -1.5px;
+  width: 18px;
+  height: 11.1px; }
+  @media (max-width: 1200px) {
+    .button__text-icon {
+      margin-right: 0; } }
+
+@media (min-width: 1201px) {
+  .button__text-icon-exclusive {
+    display: none; } }
+
+@media (max-width: 1200px) {
+  .button__text-exclusive {
+    display: none; } }
+
+@media (max-width: 1580px) {
+  .crosschain-button.button__text-exclusive {
+    display: none; } }
+
+.button__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.button_border_none {
+  border: none; }
+
+.button:hover:not([disabled]) {
+  background: #d7d7d7; }
+
+.button:active {
+  filter: invert(100%); }
+
+.button[disabled] {
+  cursor: not-allowed; }
+
+.button.hidden {
+  display: none; }
+
+.button_type_primary {
+  border-color: #4494ba;
+  color: #fff;
+  background: #4494ba;
+  font-size: 17px; }
+
+.button_type_primary:hover:not([disabled]) {
+  background: #403f3f; }
+
+.button_type_primary:active {
+  filter: invert(100%); }
+
+.button_type_primary[disabled] {
+  opacity: 0.5; }
+
+.button_type_secondary {
+  border-color: #d7d7d7;
+  color: #212121;
+  font-size: 15px; }
+
+.button_type_tertiary {
+  border-color: #d7d7d7;
+  color: #757575;
+  font-size: 15px; }
+
+.button_right_floated {
+  display: block;
+  margin-top: 1rem;
+  margin-left: auto; }
+
+.button_size_tiny {
+  height: 22px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  line-height: 18px; }
+
+.button_size_small {
+  height: 26px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  line-height: 18px; }
+
+.button_size_full-width {
+  width: 100%; }
+
+.button_size_big {
+  width: 90px; }
+
+.button_type_confirm {
+  color: #fff;
+  background-color: #57b5e1;
+  border-color: #57b5e1;
+  font-size: 15px;
+  font-family: WorkSans-Regular; }
+
+.button_type_confirm[disabled] {
+  background-color: transparent;
+  color: #7e7e7e;
+  border-color: #d7d7d7; }
+
+.button_type_confirm:hover:not([disabled]) {
+  border-color: #d7d7d7; }
+
+.button_type_confirm:active:not([disabled]) {
+  filter: none;
+  background-color: #000; }
+
+.button_type_copy {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .button_type_copy img {
+    margin-right: 0.4rem; }
+  .button_type_copy.button_type_confirm img {
+    filter: brightness(0) invert(1); }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.input, .select {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d7d7d7;
+  height: 36px;
+  line-height: 32px;
+  font-family: "WorkSans-Regular", sans-serif;
+  color: black;
+  padding: 0 10px; }
+
+.input::placeholder, .select::placeholder {
+  color: #cdcdcd; }
+
+.input_type_search {
+  background: #fff url(/static/img/search.svg) no-repeat right 16.3px top 50%;
+  background-size: 14.7px; }
+
+.input_invalid {
+  background-color: rgba(255, 0, 0, 0.6); }
+
+.input_type_textarea {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  line-height: 1em;
+  height: 4em; }
+
+.input_type_radio {
+  margin-top: -1px;
+  vertical-align: middle; }
+
+.input_type_secondary, .select_type_secondary, .labeled-input__input {
+  font-size: 15px;
+  color: #212121;
+  border-color: #d7d7d7;
+  background-color: #fff; }
+
+.input_type_secondary::placeholder, .select_type_secondary::placeholder, .labeled-input__input::placeholder {
+  color: #b4b2b2; }
+
+.input_type_tertiary, .select_type_tertiary {
+  font-size: 15px;
+  color: #757575;
+  border-color: #d7d7d7;
+  background-color: transparent; }
+
+.input_width_full {
+  width: 100%; }
+
+input::-webkit-caps-lock-indicator {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%); }
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+input[type=number] {
+  -moz-appearance: textfield; }
+
+.input:disabled, .select:disabled {
+  color: #757575;
+  cursor: not-allowed; }
+
+.input_transparent {
+  background: none;
+  border: none; }
+
+.slider {
+  color: #757575;
+  font-size: 14px;
+  margin: 0.5rem 0; }
+  .slider .slider_min, .slider .slider_max {
+    margin-top: -0.6rem;
+    margin-bottom: 0.5rem; }
+  .slider .slider_min {
+    float: left; }
+  .slider .slider_max {
+    float: right; }
+  .slider .clear {
+    clear: both; }
+  .slider input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background-color: #999;
+    margin: 1rem 0;
+    border-radius: 3px; }
+  .slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #999;
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25); }
+  .slider input::-webkit-slider-thumb:hover {
+    background: #eee; }
+  .slider input::-webkit-slider-thumb:active {
+    background: #ddd; }
+
+.dimensional-input-wrapper__units {
+  pointer-events: none;
+  position: absolute;
+  padding-left: 10px;
+  color: #757575; }
+
+.dimensional-input-wrapper {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%; }
+  .dimensional-input-wrapper .dimensional-input-wrapper__units + input {
+    padding-left: 90px; }
+
+.dimensional-input__feedback {
+  position: absolute;
+  right: 0.5em;
+  padding-left: 0.5em;
+  text-align: right;
+  color: #757575;
+  background: white;
+  max-width: 60%;
+  height: 1.1em; }
+
+.define-keyset__external-key-input {
+  margin-bottom: 10px; }
+
+.input-max-toggle {
+  margin-left: 20px; }
+  .input-max-toggle .checkbox__checkmark {
+    margin-right: 5px; }
+
+.password-input {
+  padding-left: 46px;
+  line-height: initial;
+  font-size: 16px;
+  font-weight: initial;
+  flex-grow: 1; }
+
+.password-input__wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; }
+
+.password-input__lock {
+  position: absolute;
+  left: 15px;
+  justify-content: space-around;
+  align-items: center; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.select {
+  -webkit-appearance: none;
+  background: url(/static/img/arrow-both.svg) no-repeat right 14px top 50%;
+  background-size: 10px;
+  padding-right: 36px;
+  cursor: pointer; }
+
+.select option {
+  margin-left: 14px; }
+
+.select_type_special {
+  font-size: 15px;
+  background-image: url(/static/img/arrow-both.svg);
+  border: none;
+  width: auto;
+  height: 100%;
+  line-height: normal; }
+
+.select_type_primary {
+  font-size: 17px;
+  border-color: #525252;
+  padding-left: 14px; }
+
+.select_type_secondary {
+  background-image: url(/static/img/arrow-down-grey.svg); }
+
+.select_type_tertiary {
+  background-image: url(/static/img/arrow-down-grey.svg);
+  color: #757575; }
+
+.select_no_border {
+  border: none !important; }
+
+/* Select element that must have a valid selection, but does not have one right now.
+*/
+.select.select_mandatory_missing {
+  color: #757575; }
+
+.select_tiny {
+  height: 22px;
+  font-size: 14px;
+  line-height: 18px;
+  background-position: right 4px top 50%;
+  background-size: 10px 7px;
+  padding: 0 14px 0 8px; }
+
+.select_width_full {
+  width: 100%; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.label {
+  font-family: WorkSans-Medium;
+  font-size: 15px;
+  color: #757575;
+  font-weight: 500; }
+
+.label_for_radio {
+  cursor: default; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.checkbox {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.checkbox__checkmark {
+  display: block;
+  position: relative;
+  margin-right: 10px;
+  border-color: #d7d7d7;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  flex: none; }
+
+.checkbox:hover input ~ .checkbox__checkmark {
+  background-color: #d7d7d7; }
+
+.checkbox input[disabled] ~ .checkbox__checkmark {
+  background-color: #d7d7d7;
+  border-color: #d7d7d7; }
+
+.checkbox input[disabled]:checked ~ .checkbox__checkmark {
+  background-color: #d7d7d7;
+  border-color: #d7d7d7; }
+
+/* When the checkbox is checked, add a blue background */
+.checkbox input:checked ~ .checkbox__checkmark {
+  background-color: #57b5e1;
+  border-color: #57b5e1; }
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox__checkmark:after {
+  content: "";
+  position: absolute;
+  display: none; }
+
+/* Show the checkmark when checked */
+.checkbox input:checked ~ .checkbox__checkmark:after {
+  display: block; }
+
+/* Style the checkmark/indicator */
+.checkbox__checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.checkbox > input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0; }
+
+.checkbox__checkmark_type_secondary {
+  height: 14px;
+  width: 14px; }
+
+.checkbox__checkmark_type_secondary:after {
+  left: 4px;
+  top: 1px;
+  width: 2px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+  A checkbox-container is some element that contains a single checkbox
+  somewhere and should behave like all of it were the checkbox. E.g. hover on
+  the container changes the checkbox style, the cursor will be a pointer
+  everywhere in the container and a click should toggle the checkbox (this
+  needs to be taken care of in code.)
+*/
+.checkbox-container {
+  cursor: pointer; }
+
+.checkbox-container:hover .checkbox__checkmark {
+  background-color: #d7d7d7; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.sidebar {
+  width: 70px;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #454444;
+  z-index: 6; }
+  .sidebar > .sidebar__logo {
+    margin-bottom: 0; }
+
+.sidebar__content {
+  position: fixed;
+  height: calc(100% - 70px);
+  top: 70px;
+  left: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  background: #454444;
+  overflow-x: hidden;
+  transition: 0.3s; }
+  .sidebar__content .sidebar__link-label {
+    display: none; }
+  .sidebar__content:hover {
+    width: 13em; }
+    .sidebar__content:hover .sidebar__link-label {
+      display: inline; }
+  .sidebar__content > a {
+    text-decoration: none; }
+
+.sidebar__logo {
+  position: fixed;
+  background: #2D2D2F;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .sidebar__logo img {
+    width: 32px;
+    height: 32px; }
+
+.sidebar__link {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  border-left: 4px solid transparent;
+  text-decoration: none; }
+  .sidebar__link:hover {
+    background: #3D3D3E; }
+  .sidebar__link.selected {
+    background: #363637;
+    border-color: #57B5E1; }
+    .sidebar__link.selected .highlighted {
+      display: block; }
+    .sidebar__link.selected .normal {
+      display: none; }
+    .sidebar__link.selected .sidebar__link-label {
+      color: white; }
+  .sidebar__link img {
+    margin: 0 0.3em;
+    width: 20px;
+    height: 20px; }
+  .sidebar__link .normal {
+    display: block;
+    opacity: 0.5; }
+  .sidebar__link .highlighted {
+    display: none; }
+
+.sidebar__link-label {
+  margin-left: 0.7em;
+  color: #757575;
+  text-decoration: none; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.segment {
+  width: 100%;
+  padding: 0 0 20px;
+  margin-bottom: 20px; }
+
+.segment.padded {
+  padding: 20px;
+  margin-bottom: 0; }
+
+.segment:last-child {
+  margin-bottom: 0; }
+
+.segment_type_secondary {
+  padding: 0 0 0;
+  margin-bottom: 20px; }
+
+.segment_type_small-primary {
+  padding: 0 0 10px;
+  margin-bottom: 10px; }
+
+.segment_type_small-primary:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0; }
+
+.segment_type_tertiary {
+  padding: 0 0 0;
+  margin-bottom: 10px; }
+  .segment_type_tertiary:last-child {
+    margin-bottom: 0; }
+
+.segment_type_tertiary:last-child {
+  margin-bottom: 0; }
+
+.segment .segment_type_tertiary .labeled-input-inline :last-child {
+  margin-bottom: 0; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.pane {
+  display: flex;
+  flex-direction: column; }
+
+.pane__body-wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex-grow: 1; }
+
+.pane__body {
+  height: auto; }
+
+.pane__body_heightfix {
+  height: auto !important; }
+
+.pane-fullwidth {
+  width: 95%; }
+
+.pane-collapsed {
+  display: none; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.group {
+  border-radius: 4px;
+  background: #e1e2e1;
+  padding: 10px 15px; }
+
+.group__header {
+  margin-bottom: 20px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+.error_inline {
+  color: red; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.group {
+  border-radius: 4px;
+  background: #e1e2e1;
+  padding: 10px 15px; }
+
+.group__header {
+  margin-bottom: 20px; }
+
+.modal {
+  display: none;
+  z-index: 100; }
+
+.modal,
+.modal__screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.modal__screen {
+  background: rgba(0, 0, 0, 0.3); }
+
+.modal_open {
+  display: block; }
+
+body[data-modal-open='true'] {
+  overflow: hidden; }
+
+.modal__dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  min-width: 650px;
+  width: 50%;
+  height: 75%;
+  max-height: calc(100vh - 180px);
+  background: #f1f1f1;
+  border-radius: 4px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3); }
+
+.modal__header {
+  z-index: 0;
+  /*
+   These prevent the rectangle artifacts but apparently
+   also introduce a slight offset on the element itself
+  */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2d2d2f;
+  color: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 20px;
+  font-family: WorkSans-Medium;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0; }
+
+.modal__button-close {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  line-height: 1rem;
+  font-size: 17px;
+  color: #fff;
+  border-color: #525252; }
+
+.modal__button-close-x {
+  height: 18px; }
+
+.modal__main {
+  flex-grow: 1;
+  padding: 20px 20px;
+  min-height: 6em;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+/* Filler item for the body, will take up all the remaining space and is a flex box. */
+.modal__filler {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative; }
+
+.modal__filler-horizontal-center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  @media (max-height: 750px) {
+    .modal__filler-horizontal-center-box {
+      display: none; } }
+
+.modal__filler-horizontal-center-box-no-hide {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/* Image to be put in the modal__filler. */
+.modal__filler-img {
+  width: 200px;
+  padding-bottom: 20px;
+  flex: 0; }
+  @media (max-height: 1000px) {
+    .modal__filler-img {
+      width: 100px;
+      padding-bottom: 10px; } }
+  @media (max-height: 850px) {
+    .modal__filler-img {
+      width: 50px;
+      padding-bottom: 5px; } }
+
+.modal__dialog > .tab-nav {
+  margin: 20px;
+  margin-bottom: 0; }
+
+.modal__dialog .tab-set__content {
+  padding-top: 0; }
+
+.modal__footer {
+  margin: 0 20px;
+  padding: 20px 0;
+  border-top: 1px solid #d7d7d7;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  text-align: right; }
+
+.modal__footer-reversed {
+  margin: 0 20px;
+  padding: 20px 0;
+  border-top: 1px solid #d7d7d7;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  text-align: right;
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: flex-start; }
+  .modal__footer-reversed button {
+    margin-right: 20px;
+    flex-grow: 0; }
+  .modal__footer-reversed button:first-child {
+    margin-right: 0px; }
+
+.modal__footer > * {
+  margin-right: 5px; }
+
+.modal__footer > .button {
+  margin-right: 20px; }
+
+.modal__footer > *:last-child {
+  margin-right: 0; }
+
+.detail {
+  font-size: 12px;
+  margin: 0.5rem 0; }
+
+.transaction_details .signal {
+  display: inline;
+  margin-right: 1rem; }
+  .transaction_details .signal .signal__circle {
+    margin-bottom: -2px;
+    display: inline-block; }
+
+.transaction_details .title {
+  font-weight: bold;
+  font-size: 14px;
+  color: #2d2d2f;
+  margin: 1rem 0; }
+
+.transaction_details label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #2d2d2f; }
+
+.transaction_details .wallet__key {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0 1rem 0 0; }
+
+.transaction_details .table td {
+  max-width: 0;
+  text-overflow: ellipsis; }
+
+.transaction_details__raw-response {
+  word-break: break-all;
+  white-space: pre-wrap; }
+
+.details__copy-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; }
+
+.account-details__remove-account-btn {
+  float: left;
+  background-color: #f4b23e;
+  color: #fff; }
+
+.account-delete__confirm {
+  background-color: #f43e3e; }
+
+.modal__main.wallet_only__account-created-modal {
+  text-align: center; }
+
+.wallet-only__account-heading {
+  font-size: 14px;
+  line-height: 18px;
+  color: #757575; }
+
+.wallet-only__account-name {
+  font-family: WorkSans-Bold; }
+
+.wallet_only__account-created-done-splash-bg {
+  background-size: cover;
+  transform: rotateY(180deg);
+  margin: 0 auto;
+  width: 180px;
+  height: 125px; }
+
+.wallet_only__account-created-wallet-blue-icon {
+  transform: rotateY(180deg);
+  position: relative;
+  top: 20px;
+  width: 76px;
+  height: 72px; }
+
+.account-details__tx-builder-wrapper {
+  display: flex; }
+  .account-details__tx-builder-wrapper .input, .account-details__tx-builder-wrapper .select {
+    width: auto;
+    margin-right: 10px; }
+
+.grant-capabilities-title {
+  display: flex;
+  align-items: center; }
+  .grant-capabilities-title .grant-capabilities-title__title {
+    flex-grow: 2; }
+  .grant-capabilities-title .grant-capabilities-title__add-button {
+    margin-right: 1em; }
+
+.grant-capabilities-static-input {
+  padding: 0;
+  font-family: WorkSans-Medium;
+  font-weight: 500;
+  font-size: 15px;
+  color: #757575; }
+
+.grant-capabilities-apply-all-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.5em; }
+
+.grant-capabilities-apply-all {
+  background: #f1f1f1;
+  color: #757575;
+  font-size: 15px; }
+
+.grant-capabilities-static-row__wrapped-cell {
+  word-break: break-all;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  white-space: pre-wrap !important; }
+
+.signing-ui-signers__signer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden; }
+
+.cross-chain-transfer-retry {
+  margin-top: 1em; }
+
+.deploy-meta-cfg__txn-speed .labeled-input__label-inline {
+  margin-bottom: 15px; }
+
+.deploy-meta-cfg__request-expires .labeled-input__label-inline {
+  margin-bottom: 50px; }
+
+.modal__dialog.logout-confirm-modal {
+  height: auto;
+  width: auto;
+  min-width: auto; }
+
+button.button.button_type_tertiary.logout-confirm-modal__button {
+  margin-right: 2em; }
+
+.modal__success_screen p {
+  text-align: center; }
+
+.modal__success_screen .fa {
+  font-size: 10em;
+  color: #57b5e1; }
+
+.export-wallet__contents-list {
+  margin-top: 0rem; }
+
+.export-wallet__contents-includes {
+  margin-bottom: 0.2rem; }
+
+.preview-acc-key {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 5px; }
+
+.create-account__gas-payer .input.input_type_radio, .create-account__gas-payer .input_type_radio.select {
+  margin-right: 12px;
+  font-size: 16px; }
+
+.create-account__gas-payer .label.label_for_radio {
+  color: #3a3a3d; }
+
+.check-tx-status__button-wrapper {
+  text-align: right; }
+
+.signer__group {
+  margin-top: 30px; }
+
+.payload__header {
+  display: flex;
+  border-color: grey;
+  border-style: solid;
+  border-width: 1px;
+  align-items: center; }
+
+.payload__accordion-header {
+  width: 10%; }
+
+.payload__index-header {
+  width: 20%; }
+
+.payload__row {
+  padding-bottom: 20px; }
+
+.payload__accordion {
+  width: 10%; }
+
+.payload__info {
+  margin-left: 3%;
+  margin-right: 3%;
+  padding-top: 25px;
+  padding-bottom: 25px; }
+
+.payload__background-wrapper {
+  background-color: #e2e2e2;
+  margin-top: 8px; }
+
+.qs-wrapper {
+  background-color: #cbcbcb;
+  overflow: auto; }
+
+.payload__txid {
+  width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle; }
+
+.payload__tx-index {
+  width: 20%; }
+
+.signer__header {
+  display: flex;
+  margin-top: 15px;
+  align-items: center; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.table {
+  color: #757575;
+  font-size: 15px;
+  border-collapse: collapse; }
+
+.table_border_none {
+  border: none; }
+
+.table__heading, .wallet__table-heading, .key-details__table-heading {
+  height: 2em;
+  text-align: left;
+  color: #2d2d2f;
+  font-family: WorkSans-Medium;
+  font-weight: 500;
+  font-size: 15px;
+  padding-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #d7d7d7;
+  border-bottom-width: 1px; }
+
+.table__row,
+.table__row td {
+  height: 2em;
+  border-bottom-style: solid;
+  border-bottom-color: #d7d7d7;
+  border-bottom-width: 1px; }
+
+.table__row:last-child td,
+.table__row:last-child {
+  border: none; }
+
+.table__row:hover {
+  background-color: #e7e7e7; }
+
+.table_type_primary {
+  border: 1px solid #d7d7d7;
+  border-radius: 4px; }
+
+.table__row_type_primary,
+.table__row_type_primary td {
+  height: 41px;
+  line-height: 42px;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.table__row-right-aligned_type_primary {
+  padding-right: 10px; }
+
+.table__row_type_silent {
+  border: none;
+  padding-left: 0;
+  padding-right: 0; }
+
+.table__text-cell {
+  display: block;
+  padding-right: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.table__cell_size_small {
+  width: 50px; }
+
+.table__cell_size_tiny {
+  width: 25px; }
+
+.table__cell_size_main {
+  width: 250px; }
+
+.table__cell_size_double-main {
+  width: 500px; }
+
+.table__cell_size_side {
+  width: 200px; }
+
+.table__cell_size_flex {
+  flex-grow: 10; }
+
+.table__cell_size_auto {
+  width: auto; }
+
+.table__cell_padded {
+  padding: 0.5rem; }
+
+.table__last-cell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline; }
+
+.table__action-button {
+  align-items: baseline;
+  width: 90px;
+  height: 26px;
+  padding: 0;
+  line-height: normal;
+  margin-top: 8px;
+  font-size: 14px; }
+  .table__action-button .button__text-icon {
+    margin-right: 7px; }
+
+.table__left-action-button {
+  margin-right: 5px; }
+
+.table__row-counter {
+  width: 50px; }
+
+.table__row-counter:before {
+  counter-increment: li;
+  content: counter(li, decimal-leading-zero);
+  font-size: 15px;
+  font-weight: bold;
+  color: #cbcbcb;
+  margin-right: 17.9px; }
+
+ol.table {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  counter-reset: li; }
+
+li.table__row {
+  display: flex;
+  list-style-position: inside; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.pagination {
+  display: flex; }
+
+.pagination__button {
+  padding: 0 10px;
+  margin: 0 1px; }
+
+.pagination__page-count {
+  display: flex;
+  color: #757575;
+  font-size: 15px;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center; }
+
+.pagination__page-count-text {
+  display: block;
+  padding-left: 5px;
+  padding-right: 5px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; }
+
+.heading:first-child {
+  margin-top: 0; }
+
+.heading_type_h1 {
+  font-family: WorkSans-Bold;
+  font-size: 20px; }
+
+.heading_type_h2 {
+  font-family: WorkSans-Medium;
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 1em; }
+
+.heading_type_h3 {
+  font-family: WorkSans-SemiBold;
+  font-size: 14px;
+  color: #2d2d2f; }
+
+.heading_type_h4 {
+  font-size: 13px;
+  font-family: 'WorkSans-Medium';
+  font-weight: 500;
+  margin-bottom: 1em; }
+
+.heading__type-details {
+  display: inline-block;
+  font-family: WorkSans-Medium;
+  text-align: right;
+  color: #4499d9;
+  font-size: 11px;
+  /* height: 22px; */
+  line-height: normal;
+  vertical-align: text-bottom;
+  margin-right: 5px; }
+
+.heading__left-double-button {
+  margin-right: 2px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.spinner {
+  width: 100%; }
+
+.spinner__cubes {
+  margin: 100px auto;
+  width: 60px;
+  height: 40px;
+  position: relative; }
+
+.spinner__msg {
+  position: relative;
+  margin: -60px auto;
+  width: 60px; }
+
+.cube1, .cube2 {
+  background-color: #333;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
+  animation: sk-cubemove 1.8s infinite ease-in-out; }
+
+.cube2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s; }
+
+@-webkit-keyframes sk-cubemove {
+  25% {
+    -webkit-transform: translateX(48px) rotate(-90deg) scale(0.5); }
+  50% {
+    -webkit-transform: translateX(48px) translateY(48px) rotate(-180deg); }
+  75% {
+    -webkit-transform: translateX(0px) translateY(48px) rotate(-270deg) scale(0.5); }
+  100% {
+    -webkit-transform: rotate(-360deg); } }
+
+@keyframes sk-cubemove {
+  25% {
+    transform: translateX(48px) rotate(-90deg) scale(0.5);
+    -webkit-transform: translateX(48px) rotate(-90deg) scale(0.5); }
+  50% {
+    transform: translateX(48px) translateY(48px) rotate(-179deg);
+    -webkit-transform: translateX(48px) translateY(48px) rotate(-179deg); }
+  50.1% {
+    transform: translateX(48px) translateY(48px) rotate(-180deg);
+    -webkit-transform: translateX(48px) translateY(48px) rotate(-180deg); }
+  75% {
+    transform: translateX(0px) translateY(48px) rotate(-270deg) scale(0.5);
+    -webkit-transform: translateX(0px) translateY(48px) rotate(-270deg) scale(0.5); }
+  100% {
+    transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg); } }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.labeled-input {
+  color: #2d2d2f; }
+
+.labeled-input-inline {
+  display: flex;
+  align-items: center;
+  color: #2d2d2f;
+  font-family: WorkSans-Medium; }
+
+.labeled-input__label, .labeled-input__label-inline {
+  font-size: 15px;
+  margin-bottom: 10px;
+  min-width: 175px;
+  color: #2d2d2f; }
+
+.labeled-input__label-inline {
+  margin-bottom: 0px; }
+
+.labeled-input__input {
+  width: 100%;
+  flex-grow: 1;
+  background-color: transparent; }
+  .labeled-input__input.input, .labeled-input__input.select, .labeled-input__input.select, .labeled-input__input.textarea {
+    background-color: white; }
+  .labeled-input__input input {
+    width: 100%;
+    font-size: 15px; }
+
+.labeled-input__multiple {
+  margin-bottom: 10px; }
+
+.labeled-preview {
+  text-overflow: ellipsis;
+  overflow-x: hidden; }
+
+.input_type_textarea.labeled-input__input {
+  min-height: 115px; }
+
+.input_type_textarea.labeled-input__input.signature-input {
+  min-height: 0; }
+
+.input_type_textarea.labeled-input__input.labeled-input__sig-builder {
+  min-height: 350px; }
+
+.input_type_textarea.labeled-input__input.labeled-input__tx-builder {
+  height: auto;
+  resize: vertical;
+  min-height: 64px; }
+
+.horizontal-dashed-separator {
+  border: dashed 1px #979797;
+  margin: 0.5rem 0 0.5rem 0; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.fly-in {
+  position: relative; }
+
+.fly-in_from_left {
+  left: -100%;
+  animation: fly-in__slide_from_left 0.5s forwards; }
+
+.fly-in_from_right {
+  animation: fly-in__slide_from_right 0.5s forwards; }
+
+@keyframes fly-in__slide_from_left {
+  from {
+    left: -100%; }
+  to {
+    left: 0; } }
+
+@keyframes fly-in__slide_from_right {
+  from {
+    left: 100%; }
+  to {
+    left: 0; } }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+.popover {
+  cursor: help;
+  position: relative;
+  width: 100%; }
+
+/*== common styles for both parts of popover tip ==*/
+.popover__message::before,
+.popover__message::after {
+  display: none;
+  position: absolute;
+  right: 0;
+  z-index: 100; }
+
+.popover__message.popover__display::before,
+.popover__message.popover__display::after {
+  display: initial; }
+
+.popover__message.popover__error::before {
+  border-bottom-color: #5E1B1B; }
+
+.popover__message.popover__error::after {
+  border-color: #5E1B1B;
+  background: pink;
+  color: #5E1B1B; }
+
+.popover__error-state {
+  border: 0.1rem solid #5E1B1B; }
+
+.popover__icon {
+  position: absolute;
+  bottom: 10px;
+  right: 30px; }
+
+i.fa.popover__icon-error {
+  color: #f43e3e; }
+
+i.fa.popover__icon-warning {
+  color: #f4b23e; }
+
+/*== pointer tip ==*/
+/* Looks weird in the presence of the triangle icon in combo boxes */
+/*.popover__message::before {
+  bottom: 35px;
+  content: "";
+  border-left: 1rem solid transparent;
+  border-right: 0 solid transparent;
+  border-bottom: 1.4rem solid;
+}*/
+/*== speech bubble ==*/
+.popover__message::after {
+  border: 0.2rem solid;
+  border-radius: .25em;
+  content: attr(data-tip);
+  padding: 0.4rem;
+  /*bottom: -50px;*/
+  /* Used to show up below the field, but moved to above because of poor interaction with combo boxes. */
+  bottom: 40px;
+  line-height: initial; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.accordion:not(:first-child) {
+  margin-top: 20px; }
+
+.accordion__header {
+  font-family: Arial-BoldMT;
+  color: #2d2d2f;
+  font-size: 15px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 25fr 1fr;
+  margin: 0; }
+
+.accordion__header-btn-text {
+  padding-top: 0.2rem; }
+
+.accordion__content {
+  margin-top: 15px; }
+
+.accordion__toggle-button {
+  width: 24px;
+  height: 24px;
+  padding: 0 0;
+  margin-right: 10px; }
+  .accordion__toggle-button img {
+    transition: transform 0.1s;
+    transform: scale(0.4) rotate(0deg);
+    transform-origin: center center; }
+
+.accordion__title-button {
+  float: right;
+  height: 36px;
+  justify-self: end; }
+
+.accordion__collapsed-info {
+  float: right;
+  height: 36px; }
+
+.accordion-revealed .accordion__collapsed-info {
+  display: none; }
+
+.accordion-collapsed .accordion__title-button {
+  display: none; }
+
+.accordion-collapsed .accordion__toggle-button > img {
+  transform: scale(0.4) rotate(-90deg); }
+
+.accordion-collapsed .accordion__content {
+  display: none; }
+
+.deploy-settings-accordion-header__general {
+  margin-top: 0; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.new-by-name {
+  width: 100%; }
+
+.new-by-name_inputs {
+  display: flex;
+  width: 100%; }
+
+.new-by-name__input {
+  flex: 1;
+  margin: 0;
+  font-size: 15px;
+  padding: 0 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: none;
+  background-color: white; }
+
+.new-by-name__button {
+  flex: 0 1 114px;
+  width: 114px;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 15px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+.code-font {
+  font-family: 'RobotoMono', monospace;
+  font-size: 15px; }
+
+.code-font_block {
+  display: block;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-bottom: 10px; }
+
+.code-font_old {
+  color: #757575; }
+
+.code-font_type_pact-arg-name {
+  font-family: RobotoMono-LightItalic;
+  font-size: 12px;
+  color: #757575; }
+
+.code-font_type_pact-type {
+  font-family: RobotoMono-Light;
+  font-size: 12px;
+  color: #ff0200;
+  background-color: #e6e6e6;
+  border-radius: 3px;
+  height: 22px;
+  padding: 2px; }
+
+.code-font_type_arg-delimiter {
+  display: inline-block;
+  width: 1em; }
+
+.code-font_type_function-desc {
+  font-family: RobotoMono;
+  font-size: 12px;
+  color: #7b7b7b; }
+
+.code-font_type_fun-return-arrow {
+  color: #757575; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; }
+
+.page__main-header {
+  position: relative;
+  width: 100%;
+  padding-left: 22px;
+  padding-right: 36px;
+  min-height: 77px; }
+
+.page__main-header_platform_mac {
+  padding-right: 20px; }
+
+.page__main {
+  position: relative;
+  width: 100%;
+  flex: 1; }
+
+.page__content {
+  display: none;
+  flex-grow: 1; }
+
+.page__content.visible {
+  display: flex;
+  flex-direction: column;
+  height: 100%; }
+
+.page__content.accounts {
+  margin: 0;
+  flex-direction: column; }
+
+.page__content.accounts.visible {
+  display: flex; }
+
+.page__content.contracts {
+  margin: 0;
+  flex-direction: column; }
+
+.page__content.contracts.visible {
+  display: flex; }
+
+.page__network-bar-select {
+  margin-left: 22px; }
+
+.page__network-bar-token {
+  display: flex;
+  color: black;
+  font-family: "WorkSans-Regular", sans-serif;
+  margin-left: 75px; }
+
+.page__network-bar-token-text {
+  align-items: center;
+  display: flex; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  background: #57b5e1;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex: none; }
+
+.main-header__page-name {
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  flex-grow: 2; }
+
+.main-header__project-loader {
+  text-align: right;
+  float: right; }
+
+.main-header__button, .main-header__button.main-header__primary-button, .main-header__account-button, .main-header__add-account-button, .main-header__wallet-refresh-button {
+  color: #fff;
+  border-color: transparent;
+  padding: 0 20px;
+  margin-left: 10px;
+  font-size: 15px;
+  line-height: 0;
+  height: 36px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+  .main-header__primary-button.main-header__button, .main-header__primary-button.main-header__account-button, .main-header__primary-button.main-header__add-account-button, .main-header__primary-button.main-header__wallet-refresh-button {
+    color: #000;
+    background: #fff; }
+    .main-header__primary-button.main-header__button:hover, .main-header__primary-button.main-header__account-button:hover, .main-header__primary-button.main-header__add-account-button:hover, .main-header__primary-button.main-header__wallet-refresh-button:hover {
+      background: #e1e1e1; }
+
+.main-header__account-button {
+  color: #000;
+  background: #ececec; }
+
+.main-header__add-account-button {
+  color: #000;
+  background: #ececec; }
+
+.main-header__wallet-refresh-button {
+  color: #000;
+  background: #ececec; }
+
+.main-header__button > .button__text-icon, .main-header__account-button > .button__text-icon, .main-header__add-account-button > .button__text-icon, .main-header__wallet-refresh-button > .button__text-icon {
+  height: 15.5px;
+  width: auto;
+  filter: invert(100%); }
+
+.main-header__button:hover, .main-header__account-button:hover, .main-header__add-account-button:hover, .main-header__wallet-refresh-button:hover {
+  background: #403f3f; }
+
+.main-header__network-bar {
+  justify-content: flex-start;
+  background-color: white;
+  height: 70px; }
+  .main-header__network-bar .page__network-bar-status.signal {
+    margin-left: 3rem;
+    margin-right: 1rem; }
+  .main-header__network-bar .page__network-bar-select {
+    width: 7%; }
+    .main-header__network-bar .page__network-bar-select select {
+      padding-left: 0; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+.main__right-pane {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  padding-top: 43px;
+  padding-left: 22px;
+  padding-right: 22px; }
+
+.main__left-pane {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 50%;
+  border-right: 1px solid #e2e2e2; }
+
+.transfer {
+  border-bottom: 1px solid #e2e2e2;
+  position: relative;
+  width: 100%;
+  max-height: 0px;
+  transition: max-height 0.3s ease; }
+
+.transfer.transfer__expanded {
+  max-height: 600px;
+  transition: max-height 0.3s ease; }
+
+.transfer.transfer__collapsed {
+  overflow: hidden; }
+
+.transfer-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
+.transfer-fields.submit {
+  padding: 22px; }
+
+.transfer-fields.submit button.button {
+  margin-left: 10px; }
+
+.transfer__left-pane {
+  width: 50%;
+  padding-left: 22px;
+  padding-right: 22px; }
+
+.transfer__right-pane {
+  width: 50%;
+  padding-left: 22px;
+  padding-right: 22px; }
+
+/*
+.transfer__left-pane {
+    position: relative;
+
+    width: calc(50% - 5px);
+
+    padding-left: 22px;
+    padding-right: 22px;
+
+    border-right: 1px solid $main-separator-border-color;
+}
+
+.transfer__right-pane {
+    position: relative;
+    width: calc(50% - 5px);
+
+    padding-left: 22px;
+    padding-right: 22px;
+}
+*/
+.main__pane-collapse-button {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  top: 15px;
+  z-index: 1;
+  cursor: pointer;
+  opacity: 0.5;
+  left: calc(50% + 15px);
+  right: auto;
+  transform: rotate(180deg); }
+  .main__pane-collapse-button.collapsed {
+    left: auto;
+    right: 15px;
+    transform: none; }
+
+.main__wysiwyg {
+  height: 100%; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.tab-nav {
+  background: #f1f1f1; }
+
+.tab-nav__button {
+  background: transparent;
+  position: relative;
+  border-style: solid;
+  border-color: #d7d7d7;
+  border-right-width: 1px;
+  color: #757575;
+  font-size: 15px; }
+  .tab-nav__button.tab-nav__button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
+  .tab-nav__button.tab-nav__button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right-width: 0; }
+
+.tab-nav__button_type_primary {
+  height: 26px;
+  line-height: 1em;
+  font-size: 13px; }
+
+.tab-nav__button_type_primary.tab-nav__button:active,
+.tab-nav__button_type_primary.tab-nav__button_active {
+  color: black;
+  background-color: #e1e2e1; }
+
+.tab-nav_type_secondary {
+  border-bottom: 1px solid #e1e2e1;
+  padding-bottom: 0; }
+
+.tab-nav__button_type_secondary {
+  position: relative;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  padding: 0;
+  margin-right: 50px;
+  text-transform: uppercase;
+  color: #757575;
+  font-size: 15px;
+  font-family: WorkSans-Medium;
+  font-weight: 500; }
+
+.tab-nav__button_type_secondary,
+.tab-nav__button_type_secondary.tab-nav__button {
+  border-bottom: 2px solid transparent; }
+
+.tab-nav__button_type_secondary:active,
+.tab-nav__button_type_secondary.tab-nav__button_active {
+  border-bottom-color: #57b5e1;
+  color: #2d2d2f; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.tab-set {
+  height: 100%;
+  position: relative; }
+
+.tab-set__content {
+  display: none; }
+
+.tab-set__content_active {
+  display: block;
+  width: 100%;
+  padding-top: 20px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.wysiwyg {
+  position: relative;
+  height: 100%; }
+
+.wysiwyg_height_30 {
+  height: 30vh; }
+
+.wysiwyg .ace_editor {
+  font-family: 'RobotoMono', monospace;
+  font-size: 15px;
+  background: #ffffff !important;
+  border-radius: 4px; }
+
+.wysiwyg > * {
+  border-radius: 4px; }
+
+.wysiwyg .ace_editor {
+  border-radius: 4px; }
+
+.ace_gutter {
+  padding-top: 13px; }
+
+.ace_scroller {
+  margin-top: 13px;
+  margin-left: 15px; }
+
+.ace_editor {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: -8px; }
+
+.ace_container {
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 8px; }
+
+.ace_container *::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; }
+
+.ace_scrollbar {
+  display: none !important; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.keyset {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom-color: #d0d0d0;
+  border-bottom-style: solid;
+  border-bottom-width: 1px; }
+
+.keyset:last-child {
+  border-bottom: none;
+  margin-bottom: 0; }
+
+.keyset__header {
+  display: flex;
+  margin-bottom: 20px; }
+
+.keyset__icon {
+  margin-right: 0.5em; }
+
+.keyset__icon > img {
+  height: 0.9em; }
+
+.keyset__header-text {
+  flex: 8;
+  margin: 0; }
+
+.keyset__pred {
+  flex: 3;
+  text-align: right; }
+
+.keyset__delete {
+  flex: 1;
+  text-align: right; }
+
+.keyset__keys {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 3; }
+
+.keyset__key-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.setup__fullscreen {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 1.6fr;
+  grid-template-areas: "back header header ." "wrapper wrapper wrapper wrapper"; }
+
+.setup__checkbox .checkbox {
+  color: #57b5e1; }
+
+.setup__checkbox .checkbox__checkmark {
+  height: 20px;
+  width: 20px; }
+
+.setup__checkbox .checkbox__checkmark_type_secondary:after {
+  top: 2px;
+  left: 6px;
+  width: 3px;
+  height: 10px; }
+
+.setup__fullscreen .wrapper {
+  grid-area: wrapper;
+  text-align: center;
+  justify-self: center;
+  position: relative;
+  padding: 2em 2em; }
+  .setup__fullscreen .wrapper .logo {
+    margin: 0 auto;
+    font-size: 26px;
+    position: relative;
+    top: 100px;
+    background-color: #d7d7d7;
+    width: 181px;
+    height: 181px; }
+    .setup__fullscreen .wrapper .logo img.setup__kadena-logo {
+      width: 74px;
+      height: 81px;
+      margin-top: 27px; }
+    .setup__fullscreen .wrapper .logo .chainweaver {
+      font-family: HaasGrotDisp75;
+      color: initial;
+      margin-top: 7px; }
+    .setup__fullscreen .wrapper .logo .by-kadena {
+      font-family: HaasGrotDisp45;
+      font-size: 15px;
+      color: #757575; }
+    @media (max-height: 700px) {
+      .setup__fullscreen .wrapper .logo {
+        top: 75px;
+        width: 135px;
+        height: 135px;
+        font-size: 20px; }
+        .setup__fullscreen .wrapper .logo img.setup__kadena-logo {
+          margin-top: 16px;
+          width: 56px;
+          height: 61px; }
+        .setup__fullscreen .wrapper .logo .chainweaver {
+          margin-top: 7px; }
+        .setup__fullscreen .wrapper .logo .by-kadena {
+          font-size: 12px; } }
+
+.setup__back {
+  grid-area: back;
+  align-self: stretch;
+  padding-top: 16px;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  color: #757575; }
+  .setup__back > span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer; }
+    .setup__back > span > i {
+      width: 16px;
+      height: 16px;
+      opacity: 0.5;
+      margin-right: 5px; }
+
+.setup__fullscreen .setup__workflow-header {
+  grid-area: header;
+  text-align: center;
+  align-self: stretch; }
+  .setup__fullscreen .setup__workflow-header li.setup__workflow-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #57b5e1; }
+
+.setup__header-line {
+  height: 3px;
+  width: 63px;
+  background-color: #fff;
+  margin-top: 1.3rem;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative; }
+  .setup__header-line.active {
+    background-color: #57b5e1; }
+
+.setup__workflow-icons {
+  display: inline-flex;
+  justify-content: center;
+  align-items: stretch;
+  padding-inline-start: 0;
+  position: relative; }
+
+.setup__workflow-icon.active .setup__workflow-icon-circle {
+  background-color: #57b5e1; }
+
+.setup__workflow-icon-circle {
+  background-color: #fff;
+  width: 3em;
+  height: 3em;
+  border-radius: 2rem;
+  display: table;
+  border: solid;
+  border-color: #f1f1f1;
+  border-width: 0.45rem; }
+  .setup__workflow-icon-circle .setup__workflow-icon-symbol {
+    display: table-cell;
+    position: relative;
+    vertical-align: middle; }
+  .setup__workflow-icon-circle .setup__workflow-icon-label {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, 0); }
+
+.setup__workflow-icon-value {
+  position: absolute;
+  top: 1.3rem;
+  left: 1.7rem;
+  font-size: 0.7em; }
+
+.setup__new-wallet-password-text {
+  margin-bottom: 1rem;
+  color: gray; }
+
+.setup__fullscreen .setup__checkbox, .setup__fullscreen .button {
+  margin: 0.5rem 0 0.5rem 0;
+  font-weight: initial; }
+
+.setup__fullscreen .setup__password {
+  margin: 0.5rem 0 0.5rem 0;
+  padding-left: 46px;
+  height: 52px;
+  line-height: initial;
+  font-size: 16px;
+  font-weight: initial;
+  flex-grow: 1; }
+
+.setup__fullscreen .setup__password-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 350px; }
+
+.setup__fullscreen .button {
+  height: initial;
+  line-height: initial; }
+  .setup__fullscreen .button.button_type_confirm {
+    font-size: 18px;
+    height: 52px;
+    width: 350px;
+    padding: 0; }
+  .setup__fullscreen .button.button_type_secondary {
+    font-size: 15px;
+    height: 36px;
+    color: #757575;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .setup__fullscreen .button.button_type_secondary .button__text-icon {
+      height: 19px;
+      opacity: 0.4;
+      margin-right: 10px;
+      bottom: 0px; }
+
+.setup__checkbox-wrapper {
+  margin: 1rem; }
+  .setup__checkbox-wrapper .label {
+    font-family: "WorkSans-Regular", sans-serif; }
+
+.setup__checkbox {
+  color: #57b5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.setup__terms-conditions-link {
+  color: unset;
+  font-family: "WorkSans-Bold"; }
+
+.setup__key {
+  overflow-x: hidden;
+  text-overflow: ellipsis; }
+
+.setup__key_hidden {
+  text-overflow: clip; }
+
+.setup__key_type_private.setup__key_hidden {
+  cursor: alias; }
+
+.setup__help {
+  text-decoration: none; }
+
+.setup__button-horizontal-group {
+  display: flex;
+  flex-direction: row; }
+  .setup__button-horizontal-group .button {
+    margin-left: 0.5rem !important; }
+  .setup__button-horizontal-group .button:first-child {
+    margin-left: 0 !important; }
+
+.setup__passphrase-widget-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 625px;
+  margin-top: 28px; }
+
+.setup__passphrase-widget-word-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px; }
+
+.setup__passphrase-widget-word-hider {
+  background-color: #f1f1f1; }
+
+.setup__passphrase-widget-word,
+.setup__passphrase-widget-word-hider {
+  position: absolute; }
+
+.setup__passphrase-widget-word,
+.setup__passphrase-widget-word-hider,
+.setup__passphrase-widget-elem-wrapper {
+  text-align: center;
+  font-size: 20px; }
+
+.setup__passphrase-widget-word {
+  opacity: 0;
+  height: 0; }
+
+.setup__passphrase-widget-word--exposed {
+  opacity: 1;
+  height: auto; }
+
+.setup__passphrase-widget-word-hider--exposed {
+  display: none; }
+
+.setup__password-message {
+  max-height: 0;
+  overflow-y: hidden;
+  transition: max-height 0.3s linear; }
+  .setup__password-message.setup__show-pw-error {
+    max-height: 2rem; }
+
+.setup__recovery-phrase-copy.button {
+  padding: 0.4rem;
+  margin-bottom: 0;
+  border: none;
+  color: #57b5e1;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .setup__recovery-phrase-copy.button .copy-status {
+    opacity: 0;
+    transform: rotateY(90deg);
+    transition: opacity, transform 0.25s linear;
+    padding-left: 1rem; }
+    .setup__recovery-phrase-copy.button .copy-status.copy-success {
+      opacity: 1;
+      transform: none;
+      color: #57b5e1; }
+    .setup__recovery-phrase-copy.button .copy-status.copy-fail {
+      opacity: 1;
+      transform: none;
+      color: red; }
+
+.setup__hide {
+  display: none; }
+
+.setup__password-bg {
+  width: 325px;
+  margin-top: 5rem; }
+  @media (max-height: 700px) {
+    .setup__password-bg {
+      display: none; } }
+
+.setup__splash {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.setup__splash-bg {
+  width: 522px;
+  height: 360px;
+  background-size: cover; }
+  @media (max-height: 700px) {
+    .setup__splash-bg {
+      width: 392px;
+      height: 270px; } }
+
+.setup__splash-terms-buttons {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0px; }
+
+.setup__done-splash-bg {
+  transform: rotateY(180deg); }
+  @media (max-height: 700px) {
+    .setup__done-splash-bg {
+      display: none; } }
+
+.setup__done-splash-bg > * {
+  transform: rotateY(180deg); }
+
+.setup__wallet-blue-icon {
+  position: relative;
+  top: 60px;
+  margin: 0 auto;
+  height: 250px; }
+
+.setup__repeat-icon {
+  position: absolute;
+  color: #212121;
+  left: 350px;
+  z-index: 10; }
+  .setup__repeat-icon .fa-repeat {
+    font-size: 7rem;
+    top: 1px; }
+
+.setup__waiting-passphrase {
+  min-height: 20em;
+  padding-top: 3em; }
+
+.setup__recover-enter-password {
+  min-height: 20em; }
+
+.setup__recovery-text {
+  margin: 2rem; }
+
+.setup__restore-existing-button {
+  border: 0; }
+
+.setup__recover-restore-button .button.button_type_confirm {
+  background-color: #F3AB3C;
+  border-color: #F3AB3C;
+  color: #fff; }
+
+.setup__continue-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
+.setup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.setup__verify-passphrase-wrapper {
+  margin-bottom: 20px; }
+
+.setup__recover-import-title {
+  font-size: 1.4em;
+  margin-bottom: 0; }
+
+.setup__recover-import-text {
+  color: #757575;
+  font-size: 0.8em; }
+
+.setup__recover-import-file {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #d7d7d7;
+  cursor: pointer;
+  font-size: 0.8em;
+  padding: 15px 10px;
+  width: 350px;
+  display: flex; }
+  .setup__recover-import-file .setup__recover-import-file-text {
+    margin-left: 10px;
+    margin-top: 2px;
+    color: #757575; }
+  .setup__recover-import-file img {
+    height: 16px;
+    display: inline-block;
+    flex-grow: 0; }
+
+.setup__signing-request {
+  max-width: 350px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.tx-logs .table-row {
+  border: 1px solid #d7d7d7;
+  border-radius: 4px; }
+
+.tx-logs .table__cell {
+  padding-top: 12px;
+  padding-bottom: 12px; }
+  .tx-logs .table__cell.tx-log-row__request-key {
+    overflow: hidden;
+    white-space: nowrap; }
+    .tx-logs .table__cell.tx-log-row__request-key .request-key-text {
+      margin-right: 10px;
+      text-overflow: ellipsis; }
+
+.tx-log-row__ix {
+  text-align: center;
+  color: #cbcbcb;
+  font-family: WorkSans-Bold; }
+
+.tx-log-export-status {
+  margin-left: 1rem; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.repl {
+  font-family: 'RobotoMono', monospace;
+  font-size: 15px;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 10px; }
+
+.repl__header {
+  display: inline;
+  color: #646464; }
+
+.repl__header-section {
+  margin-bottom: 15px; }
+
+.repl__header-separator {
+  margin-top: 25px;
+  margin-bottom: 25px; }
+  .repl__header-separator hr {
+    border-style: dashed;
+    border-color: #57b5e1; }
+
+.repl__header-banner.repl__header-banner-text {
+  display: inline;
+  font-family: WorkSans-Bold; }
+
+.repl__header-banner.repl__header-banner-decoration {
+  display: inline;
+  font-family: WorkSans-Regular; }
+
+.repl__header-plain {
+  display: inline;
+  font-family: WorkSans-Light; }
+
+.repl__header-quote {
+  display: inline;
+  font-family: WorkSans-Medium; }
+
+.repl__header-code {
+  display: inline;
+  font-family: RobotoMono;
+  font-size: 14px; }
+
+.repl__input-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; }
+
+.repl__prompt {
+  display: inline;
+  padding-right: 5px;
+  flex-grow: 0; }
+
+.repl__input {
+  flex-grow: 1;
+  border: none;
+  padding: 0;
+  background: transparent;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0; }
+
+.repl__input:focus {
+  outline: none; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.signing-selector__check-box-cell {
+  padding: 0 0 0 0; }
+
+.signing-selector__check-box-label {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: right; }
+
+.signing-selector__check-box-label > .checkbox__checkmark {
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: auto; }
+
+.signing-selector__check-box {
+  text-align: right; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 9px;
+  /* Results in 10 pix, together with margin of child elements. */
+  margin-top: -1px;
+  /* Get rid of inner element's top margin. */
+  margin-left: -1px;
+  margin-right: -1px; }
+
+.filter-bar > * {
+  margin: 1px 1px; }
+
+.filter-bar__search {
+  flex: 1 1 0;
+  min-width: 150px; }
+
+.filter-bar__chain-filter {
+  flex: 1 1 0;
+  min-width: 150px; }
+
+.filter-bar__pagination {
+  margin: 1px 0px;
+  /* 0px left and right because of button's margin's */
+  flex-grow: 1; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.icon {
+  display: inline-block;
+  position: relative;
+  background-repeat: no-repeat;
+  height: 1rem;
+  width: 1rem; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.error-list {
+  font-size: 15px;
+  display: flex;
+  min-height: 20px;
+  align-items: center; }
+
+.error-list__msg {
+  flex-grow: 1;
+  color: #757575; }
+
+.error-list__icon {
+  margin-right: 1em; }
+
+.error-list__line-number {
+  display: inline-block;
+  margin-right: 1em;
+  color: #757575; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.signal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+
+.signal__circle {
+  border-radius: 50%;
+  height: 11px;
+  width: 11px;
+  background-color: lightgrey; }
+
+.signal__circle_status_ok {
+  background-color: #7FFF00; }
+
+.signal__circle_status_problem {
+  background-color: red; }
+
+.signal__circle_status_warning {
+  background-color: yellow; }
+
+.signal__left-floated {
+  float: left;
+  margin-right: 1rem; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+ol.transaction_status {
+  counter-reset: li;
+  list-style: none;
+  font-size: 14px; }
+  ol.transaction_status li {
+    counter-increment: li;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 32px;
+    position: relative; }
+    ol.transaction_status li:first-child {
+      margin-top: 0; }
+    ol.transaction_status li.done {
+      font-weight: bold; }
+    ol.transaction_status li::before {
+      content: counter(li);
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      background-color: white;
+      position: absolute;
+      top: 0%;
+      left: -30px;
+      text-align: center;
+      font-size: 10px;
+      color: #666; }
+    ol.transaction_status li.done::before, ol.transaction_status li.done::after {
+      background-color: #57b5e1; }
+    ol.transaction_status li.done::before {
+      content: "\f00c";
+      font-family: FontAwesome;
+      color: white; }
+    ol.transaction_status li.failed::before {
+      content: "\f00d";
+      font-family: FontAwesome;
+      color: red; }
+    ol.transaction_status li::after {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 28px;
+      background-color: white;
+      border-radius: 1px;
+      position: absolute;
+      bottom: calc(100% + 2px);
+      left: -21px; }
+    ol.transaction_status li:first-child::after {
+      display: none; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.wallet-scroll-wrapper {
+  overflow: auto; }
+
+.wallet__keys-list {
+  padding-left: 22px;
+  margin-top: 3px;
+  /* Make the bottom border of the transfer section visible */ }
+
+.wallet__table-row {
+  border-style: solid;
+  border-color: #d7d7d7;
+  border-width: 1px; }
+
+.wallet__table-row-account {
+  background-color: #d7d7d7;
+  border-bottom: 2px #f1f1f1 solid; }
+
+.wallet__table-heading {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  white-space: nowrap;
+  position: sticky;
+  top: 0px;
+  z-index: 5;
+  background: #f1f1f1;
+  box-shadow: 0px -1px 0px 1px #f1f1f1; }
+
+.wallet__table-cell {
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.wallet__table-cell-balance {
+  word-break: break-word; }
+
+.wallet__table-cell-keyset {
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.wallet__public-key {
+  display: flex;
+  flex-direction: row; }
+  .wallet__public-key .wallet__public-key__prefix {
+    text-overflow: ellipsis;
+    overflow: hidden; }
+
+.wallet__table-wallet-address {
+  width: 15em;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+
+.wallet__table-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; }
+
+.wallet__table-button, .wallet__table-button-with-background {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #757575;
+  padding: 0 10px;
+  font-size: 0.8em;
+  margin-right: 10px;
+  line-height: 22px;
+  height: 26px;
+  background-color: #e1e1e1;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+  @media (max-width: 1200px) {
+    .wallet__table-button, .wallet__table-button-with-background {
+      padding: 0 10px;
+      margin-right: 0; }
+      .wallet__table-button:not(:first-child), .wallet__table-button-with-background:not(:first-child) {
+        border-left: none;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0; }
+      .wallet__table-button:not(:last-child), .wallet__table-button-with-background:not(:last-child) {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0; } }
+
+.wallet__table-button-with-background {
+  background-color: #f1f1f1; }
+
+.wallet__table-button--hamburger {
+  padding: 0 15px; }
+
+.labeled-input__input.account-chain-input .popover {
+  width: 70%;
+  display: inline-block; }
+
+.labeled-input__input.account-chain-input input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; }
+
+.labeled-input__input.account-chain-input select {
+  width: 30%;
+  background-color: white;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  font-size: 15px; }
+
+.key-display {
+  font-family: 'RobotoMono', monospace; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 40px; }
+
+.icon-grid__cell {
+  display: block;
+  text-decoration: none;
+  margin: 10px;
+  width: 420px;
+  cursor: pointer;
+  color: #000; }
+  .icon-grid__cell:visited {
+    color: #000; }
+  @media (max-height: 800px) and (max-width: 1450px) {
+    .icon-grid__cell {
+      padding-top: 30px; } }
+
+.icon-grid__cell-icon {
+  background-color: #454444;
+  border-radius: 50%;
+  width: 130px;
+  height: 130px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  margin: 40px auto; }
+  @media (max-height: 800px) and (max-width: 1450px) {
+    .icon-grid__cell-icon {
+      display: none; } }
+
+.icon-grid__cell-launch {
+  position: relative;
+  top: 3px;
+  right: 5px;
+  height: 18px; }
+
+.icon-grid__cell-header {
+  border-color: #d7d7d7;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 18px;
+  width: 100%;
+  height: 84px;
+  background-color: #f1f1f1; }
+  .icon-grid__cell-header:hover .icon-grid__cell-launch {
+    filter: brightness(0) invert(1); }
+
+.icon-grid__cell-title {
+  color: #454444; }
+
+.icon-grid__cell-desc {
+  text-align: center;
+  color: #757575;
+  padding: 20px;
+  font-size: 14px; }
+
+.lock-screen__invalid-password {
+  color: #f43e3e;
+  visibility: hidden; }
+
+.lock-screen__invalid-password--invalid {
+  visibility: visible; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.key-details__table-row {
+  border-style: solid;
+  border-color: #d7d7d7;
+  border-width: 1px; }
+
+.key-details__table-heading {
+  padding-bottom: 5px;
+  padding-left: 15px; }
+
+.key-details__table-cell {
+  padding: 5px 15px 5px 15px;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+
+.key-details__table-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; }
+
+.key-details__table-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #757575;
+  padding: 0 10px;
+  font-size: 0.8em;
+  margin-right: 10px;
+  line-height: 22px;
+  height: 26px;
+  text-overflow: ellipsis;
+  overflow: hidden; }
+
+.key-details__table-id {
+  padding: 5px 0px 5px 15px; }
+
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*********************************************************************************
+   Ensure classes and structure are created in accordance with the BEM methodology.
+   For more info: https://en.bem.info/methodology/quick-start/
+
+*********************************************************************************/
+/*
+ In webkit browsers, we've ran into strange artifacts where multiple
+ rectangle-shaped sections of an element aren't rendered properly.
+
+ Manually resizing the window seems to fix a particular instance.
+
+ Presumably some bug regarding stacking-contexts:
+ https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+*/
+.empty-state {
+  text-align: center;
+  color: #757575;
+  font-family: WorkSans, sans-serif; }
+
+.empty-state__icon-circle {
+  width: 136px;
+  height: 136px;
+  border-radius: 68px;
+  background-color: #454444;
+  margin: 140px auto 20px auto;
+  padding: 36px;
+  text-align: center; }
+
+.empty-state__icon {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 60px;
+  height: 60px; }
+
+.empty-state__title {
+  font-size: 22px;
+  font-weight: normal; }
+
+.empty-state__content p {
+  font-size: 16px;
+  margin-top: 40px; }
+
+.margin {
+  margin: 10px 15px; }
+
+.flex {
+  display: flex; }
+
+.flex-grow {
+  flex-grow: 1; }
+
+.paddingTop {
+  padding-top: 10px; }
+
+.paddingLeftTopRight {
+  padding: 10px 20px 0 20px; }
